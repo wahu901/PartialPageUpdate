@@ -4,30 +4,49 @@
     ViewData["Title"] = "AjaxPartial";
 }
 
-<h1>AjaxPartial</h1>
 
 
-<partial name="_CarPartial" model="Model.Cars" />
+<h2>Ajax 1</h2>
+<form method="post">
+    <partial name="_CarPartial1" model="Model.Cars" />
+    <input type="submit" value="Load1" asp-page-handler="CarPartial1" class="btn btn-primary" />
+</form>
+
+<p></p>
+
+<h2>Ajax 2</h2>
+<p><button class="btn btn-primary" id="load2">Load2</button></p>
+<div id="grid2"></div>
+<p></p>
 
 
-
-
-
-<h2>Ajax</h2>
-<p><button class="btn btn-primary" id="load">Load</button></p>
+<h2>Ajax 3</h2>
+<p><button class="btn btn-primary" id="load3">Load3</button></p>
+<div id="grid3"></div>
 
 @section scripts{
     <script>
-        document.getElementById('load').addEventListener('click', () => {
-            fetch('/ajaxpartial?handler=CarPartial')
+        document.getElementById('load2').addEventListener('click', () => {
+            fetch('/ajaxpartial?handler=CarPartial2')
                 .then((response) => {
                     return response.text();
                 })
                 .then((result) => {
-                    document.getElementById('grid').innerHTML = result;
+                    document.getElementById('grid2').innerHTML = result;
                 });
         });
+
+        document.getElementById('load3').addEventListener('click', () => {
+            fetch('/ajaxpartial?handler=CarPartial3')
+                .then((response) => {
+                    return response.text();
+                })
+                .then((result) => {
+                    document.getElementById('grid3').innerHTML = result;
+                });
+        });
+
     </script>
 }
 
-<div id="grid"></div>
+

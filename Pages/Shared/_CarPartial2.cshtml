@@ -3,4 +3,17 @@
 <h1>_Car Partial2 </h1>
 
 
-<div id="grid"></div>
+<table class="table table-striped">
+    @foreach (var car in Model)
+    {
+        <tr>
+            <td>@car.Model</td>
+            <td>@car.Make</td>
+            <td>@car.Year</td>
+            <td>$@car.Price</td>
+        </tr>
+
+
+
+    }
+</table>
