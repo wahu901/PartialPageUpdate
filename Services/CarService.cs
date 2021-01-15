@@ -19,5 +19,15 @@ namespace PartialPageUpdate.Services
         };
             return cars;
         }
+
+        public Car newCar()
+        {
+            return new Car { Id = 6, Make = "Toyota", Model = "Camry", Year = 2016, Doors = 5, Colour = "Silver", Price = 32995 };
+        }
+
+        public Car newCar2()
+        {
+            return new Car { Id = 6, Make = "Honda", Model = "Camry", Year = 2016, Doors = 5, Colour = "Silver", Price = 32995 };
+        }
     }
 }

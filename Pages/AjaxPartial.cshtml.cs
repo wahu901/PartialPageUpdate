@@ -17,29 +17,54 @@ namespace PartialPageUpdate
             _carService = carService;
         }
 
+        [BindProperty]
         public List<Car> Cars { get; set; }
         public void OnGet()
         {
             //Cars = _carService.GetAll();
+            Console.WriteLine("on get");
             Cars = new List<Car>();
+            //Cars.Add(_carService.newCar2());
+
         }
 
-        
-        public void OnPostCarPartial1()
+
+ 
+
+        public PartialViewResult OnGetCarPartial1()
         {
             Cars = _carService.GetAll();
+            return Partial("_CarPartial_View", Cars);
         }
 
-        public PartialViewResult OnGetCarPartial2()
+        public PartialViewResult OnPostCarPartial2()
         {
+            Console.WriteLine("On Post");
             Cars = _carService.GetAll();
-            return Partial("_CarPartial2", Cars);
+            return Partial("_CarPartial_View", Cars);
         }
 
-        public JsonResult OnGetCarPartial3()
+
+        public PartialViewResult OnGetCarPartial3()
         {
-            Cars = _carService.GetAll();
-            return new JsonResult(Cars);
+            if (Cars == null)
+            {
+                Console.WriteLine("Null Car List");
+                Cars = new List<Car>();
+            }
+            else
+            {
+                Console.WriteLine("Not Null Car List");
+            }
+            Cars.Add(new Car());
+            return Partial("_CarPartial_Edit", Cars);
+        }
+
+
+        public PartialViewResult OnPostCarPartial4()
+        {
+            Cars.Add(new Car());
+            return Partial("_CarPartial_Edit", Cars);
         }
 
 

@@ -1,0 +1,43 @@
+﻿@model List<PartialPageUpdate.Models.Car>
+
+<h1>_Car Partial4 </h1>
+
+
+<table class="table table-striped">
+
+
+    @{
+        int i = 0;
+    }
+
+
+    @foreach (var car in Model)
+    {
+        <tr>
+            <td>
+                <input asp-for="@car.Id" id="Cars_@(i)_Id" name="Cars[@(i)]_Id" />
+            </td>
+            <td>
+                <input asp-for="@car.Model" id="Cars_@(i)_Model" name="Cars[@(i)]_Model" />
+            </td>
+            <td>
+                <input asp-for="@car.Make" id="Cars_@(i)_Make" name="Cars[@(i)]_Make" />
+            </td>
+            <td>
+                <input asp-for="@car.Year" id="Cars_@(i)_Year" name="Cars[@(i)]_Year" />
+            </td>
+            <td>
+                <input asp-for="@car.Price" id="Cars_@(i)_Price" name="Cars[@(i)]_Price" />
+            </td>
+            <td>
+                <input asp-for="@car.Doors" id="Cars_@(i)_Doors" name="Cars[@(i)]_Doors" />
+            </td>
+            <td>
+                <input asp-for="@car.Colour" id="Cars_@(i)_Colour" name="Cars[@(i)]_Colour" />
+            </td>
+        </tr>
+
+        i++;
+
+    }
+</table>

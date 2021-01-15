@@ -6,46 +6,88 @@
 
 
 
+<p></p>
+
 <h2>Ajax 1</h2>
-<form method="post">
-    <partial name="_CarPartial1" model="Model.Cars" />
-    <input type="submit" value="Load1" asp-page-handler="CarPartial1" class="btn btn-primary" />
-</form>
+<p><button class="btn btn-primary" id="load1">Load by Get</button></p>
 
 <p></p>
 
+
 <h2>Ajax 2</h2>
-<p><button class="btn btn-primary" id="load2">Load2</button></p>
-<div id="grid2"></div>
+<p><button class="btn btn-primary" id="load2">Load by Post</button></p>
 <p></p>
 
 
 <h2>Ajax 3</h2>
-<p><button class="btn btn-primary" id="load3">Load3</button></p>
-<div id="grid3"></div>
+<p><button class="btn btn-primary" id="new3">New by Get</button></p>
+<p></p>
+
+
+<h2>Ajax 4</h2>
+<p><button class="btn btn-primary" id="new4">New by Post</button></p>
+
+<h2>Ajax 6</h2>
+<form id="form5" method="post">
+    <input type="submit" value="New6" asp-page-handler="CarPartial6" class="btn btn-primary" />
+</form>
+
+
+<div id="grid"></div>
 
 @section scripts{
+
+
     <script>
-        document.getElementById('load2').addEventListener('click', () => {
-            fetch('/ajaxpartial?handler=CarPartial2')
+        document.getElementById('load1').addEventListener('click', () => {
+            fetch('/ajaxpartial?handler=CarPartial1')
                 .then((response) => {
                     return response.text();
                 })
                 .then((result) => {
-                    document.getElementById('grid2').innerHTML = result;
+                    document.getElementById('grid').innerHTML = result;
                 });
         });
 
-        document.getElementById('load3').addEventListener('click', () => {
+        document.getElementById('load2').addEventListener('click', () => {
+            fetch('/ajaxpartial?handler=CarPartial2', {
+                method: 'POST', // or 'PUT'
+            })
+                .then((response) => {
+                    return response.text();
+                })
+                .then((result) => {
+                    document.getElementById('grid').innerHTML = result;
+                });
+        });
+
+
+        document.getElementById('new3').addEventListener('click', () => {
             fetch('/ajaxpartial?handler=CarPartial3')
                 .then((response) => {
                     return response.text();
                 })
                 .then((result) => {
-                    document.getElementById('grid3').innerHTML = result;
+                    document.getElementById('grid').innerHTML = result;
                 });
         });
 
+
+  
+
+
+        document.forms['form6'].onsubmit = () => {
+            let formData = new FormData(document.forms['form6']);
+            fetch('', {
+                method: 'post',
+                body: new URLSearchParams(formData)
+            })
+                .then(() => {
+                    alert('Posted using Fetch');
+                });
+            return false;
+        };
+                 
     </script>
 }
 
